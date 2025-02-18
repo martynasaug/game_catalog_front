@@ -4,7 +4,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import '../styles/login.css';
+import '../styles/login.css'; // Import login styles
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -20,7 +20,7 @@ const Login = () => {
                 password,
             });
 
-            const { id, username: userUsername, roles, token } = response.data;
+            const { token, id, username: userUsername, roles } = response.data;
 
             if (token && id) {
                 // Store user details including the token in localStorage under the "user" key
