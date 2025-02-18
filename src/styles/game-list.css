@@ -1,0 +1,163 @@
+/* src/styles/game-list.css */
+.game-list-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px; /* Adjust margin to account for navbar height */
+    animation: fadeIn 0.5s ease; /* Apply fade-in animation */
+}
+
+.game-list-container h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+/* Add Game Button Container */
+.add-game-button-container {
+    display: flex;
+    justify-content: flex-end; /* Align button to the right */
+    margin-bottom: 20px; /* Add space between button and game grid */
+}
+
+.add-game-button-container .button-link {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #4CAF50; /* Green buttons */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.add-game-button-container .button-link:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Game Grid Layout */
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Responsive grid layout */
+    gap: 20px; /* Add space between cards */
+    justify-items: center; /* Center items in each grid cell */
+}
+
+/* Game Card Styling */
+.game-card {
+    text-decoration: none; /* Remove underline from Link */
+    color: #fff; /* Ensure text remains white */
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.8); /* Darker background for cards */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    width: 100%;
+    max-width: 350px; /* Fixed card width */
+    position: relative;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Game Image */
+.game-image {
+    width: 100%; /* Full width of the container */
+    max-height: 150px; /* Limit the height to 150px */
+    object-fit: contain; /* Ensure the full image is visible without cropping */
+    border-radius: 10px 10px 0 0; /* Rounded corners for the top part */
+    transition: transform 0.3s ease; /* Smooth transition */
+}
+
+.game-image:hover {
+    transform: scale(1.1); /* Slightly enlarge image on hover */
+}
+
+/* Game Card Content */
+.game-card-content {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.game-card-content h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.game-card-content p {
+    margin: 5px 0;
+    color: #ddd;
+    text-align: justify;
+    width: 100%;
+    text-align: center;
+}
+
+.game-card-content strong {
+    color: #fff;
+}
+
+/* Edit Button Container */
+.edit-button-container {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.edit-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #2196F3; /* Blue background */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.edit-button:hover {
+    background-color: #1E88E5; /* Darker blue hover background */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .game-list-container {
+        margin: 30px auto; /* Adjusted margin for smaller screens */
+        padding: 15px;
+    }
+
+    .add-game-button-container .button-link {
+        font-size: 14px;
+        padding: 10px 15px; /* Reduce padding */
+    }
+
+    .game-grid {
+        gap: 15px; /* Reduce space between cards */
+    }
+
+    .game-card {
+        max-width: 250px; /* Reduce card width */
+    }
+
+    .edit-button {
+        font-size: 12px;
+        padding: 8px 10px; /* Reduce padding */
+    }
+}

@@ -1,0 +1,58 @@
+/* src/index.css */
+
+@import './styles/common.css';
+@import './styles/navbar.css';
+@import './styles/home.css';
+@import './styles/game-list.css';
+
+html, body, #root {
+    margin: 0;
+    padding: 0;
+    background-color: #121212 !important; /* Dark mode background */
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+h1, h2, h3, p, strong {
+    color: #ffffff; /* White text */
+}
+
+a {
+    color: #4CAF50; /* Green link color */
+    text-decoration: none;
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+a:hover {
+    color: #45a049; /* Darker green on hover */
+    text-decoration: underline;
+}
+
+/* Global Fade-In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease;
+}
+
+/* Hover Effect for Buttons */
+button {
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover effect */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}

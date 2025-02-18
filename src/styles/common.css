@@ -1,0 +1,71 @@
+/* src/styles/common.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #121212; /* Dark mode background */
+    color: #ffffff; /* White text */
+    font-family: Arial, sans-serif;
+}
+
+.login-container,
+.register-container,
+.game-list-container,
+.game-details-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.5s ease; /* Apply global fade-in animation */
+}
+
+input, textarea, select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #444; /* Dark border */
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle background */
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    background-color: rgba(255, 255, 255, 0.2); /* Highlight on focus */
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button.green {
+    background-color: #4CAF50; /* Green buttons */
+}
+
+button.green:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+button.blue {
+    background-color: #2196F3; /* Blue buttons */
+}
+
+button.blue:hover {
+    background-color: #1E88E5; /* Darker blue on hover */
+}
+
+button.red {
+    background-color: #F44336; /* Red buttons */
+}
+
+button.red:hover {
+    background-color: #E53935; /* Darker red on hover */
+}

@@ -1,0 +1,77 @@
+/* src/styles/navbar.css */
+.navbar {
+    background-color: #000; /* Black background */
+    padding: 0 20px; /* Horizontal padding */
+    height: 60px; /* Fixed height */
+    display: flex;
+    align-items: center; /* Vertically center items */
+    justify-content: space-between; /* Space between logo and links */
+    position: fixed; /* Fix navbar at the top */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure navbar stays above other content */
+    animation: fadeIn 0.5s ease; /* Apply fade-in animation */
+}
+
+.navbar-logo {
+    flex-shrink: 0; /* Prevent logo from shrinking */
+    height: 40px; /* Fixed logo height */
+}
+
+.navbar-logo img {
+    height: 100%; /* Image fills container */
+    width: auto; /* Maintain aspect ratio */
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    gap: 10px; /* Add spacing between items */
+    flex-shrink: 0; /* Prevent links from shrinking */
+}
+
+.navbar-link.fancy {
+    color: #fff; /* White text */
+    text-decoration: none; /* Remove underline */
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    background-color: #2196F3; /* Blue background */
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.navbar-link.fancy:hover {
+    background-color: #1E88E5; /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.logout-button.fancy {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #F44336; /* Red background */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+.logout-button.fancy:hover {
+    background-color: #E53935; /* Darker red on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        height: 50px; /* Reduce height */
+        padding: 0 10px; /* Reduce padding */
+    }
+
+    .navbar-link.fancy,
+    .logout-button.fancy {
+        font-size: 12px; /* Reduce font size */
+        padding: 8px 10px; /* Reduce padding */
+    }
+}

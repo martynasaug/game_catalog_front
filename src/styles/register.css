@@ -1,0 +1,81 @@
+/* src/styles/register.css */
+
+.register-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+.register-container h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ddd;
+}
+
+.input-group input {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.input-group input:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.register-button {
+    padding: 12px;
+    font-size: 16px;
+    background-color: #4CAF50; /* Green background */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.register-button:hover {
+    background-color: #45a049; /* Darker green hover background */
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ddd;
+}
+
+.login-link .link {
+    color: #2196F3; /* Blue link color */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-link .link:hover {
+    text-decoration: underline;
+    color: #1E88E5; /* Darker blue hover color */
+}

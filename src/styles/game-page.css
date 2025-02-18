@@ -1,0 +1,165 @@
+/* src/styles/game-page.css */
+
+.game-page-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Title */
+.game-page-container h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Game Image */
+.game-image {
+    width: 100%; /* Full width of the container */
+    max-height: 250px; /* Limit the height to 250px */
+    object-fit: contain; /* Ensure the full image is visible without cropping */
+    border-radius: 10px; /* Rounded corners */
+    margin-bottom: 20px; /* Add space below the image */
+    transition: transform 0.3s ease; /* Smooth transition */
+}
+
+.game-image:hover {
+    transform: scale(1.1); /* Slightly enlarge image on hover */
+}
+
+/* Game Details Box */
+.game-details-box {
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle background */
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.game-details-box p {
+    margin: 5px 0;
+    color: #ddd;
+}
+
+/* Reviews Section */
+.reviews-section {
+    margin-top: 20px;
+}
+
+.reviews-section h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #fff;
+    text-align: center;
+}
+
+.review-card {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.review-card strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #ddd;
+}
+
+.review-card p {
+    margin: 5px 0;
+    color: #fff;
+    text-align: justify;
+}
+
+/* Add Review Section */
+.add-review-section {
+    margin-top: 20px;
+}
+
+.add-review-section textarea {
+    width: 100%;
+    max-width: 600px;
+    height: 100px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #444; /* Dark border */
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle background */
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.add-review-section textarea:focus {
+    background-color: rgba(255, 255, 255, 0.2); /* Highlight on focus */
+}
+
+.add-review-section button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50; /* Green background */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.add-review-section button:hover {
+    background-color: #45a049; /* Darker green hover background */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Admin Controls */
+.admin-controls {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.admin-controls button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #2196F3; /* Blue background */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.admin-controls button:hover {
+    background-color: #1E88E5; /* Darker blue hover background */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .game-page-container {
+        margin: 30px auto;
+        padding: 15px;
+    }
+
+    .game-image {
+        max-height: 200px; /* Reduce image height on smaller screens */
+    }
+
+    .add-review-section textarea {
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    .add-review-section button,
+    .admin-controls button {
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+}
