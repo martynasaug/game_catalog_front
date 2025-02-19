@@ -1,5 +1,6 @@
 /* src/styles/game-page.css */
 
+/* Game Page Container */
 .game-page-container {
     max-width: 600px;
     margin: 40px auto;
@@ -8,7 +9,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     color: #fff;
-    animation: fadeIn 0.5s ease;
+    animation: fadeIn 0.5s ease; /* Smooth fade-in animation */
 }
 
 /* Title */
@@ -16,6 +17,7 @@
     font-size: 2em;
     margin-bottom: 20px;
     text-align: center;
+    color: #fff;
 }
 
 /* Game Image */
@@ -43,6 +45,19 @@
 .game-details-box p {
     margin: 5px 0;
     color: #ddd;
+}
+
+/* Star Rating Display */
+.star-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 1.2em;
+    color: gold; /* Gold stars */
+}
+
+.star-rating span.empty-star {
+    color: #ccc; /* Gray empty stars */
 }
 
 /* Reviews Section */
@@ -80,30 +95,72 @@
     text-align: justify;
 }
 
+/* Delete Review Button */
+.delete-review-button {
+    padding: 5px 10px; /* Smaller size */
+    font-size: 12px; /* Smaller font */
+    background-color: #f44336; /* Red background */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 10px; /* Add spacing above the button */
+}
+
+.delete-review-button:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
 /* Add Review Section */
 .add-review-section {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between elements */
 }
 
 .add-review-section textarea {
     width: 100%;
     max-width: 600px;
-    height: 100px;
-    padding: 8px;
+    height: 120px; /* Increased height for better usability */
+    padding: 10px;
     font-size: 16px;
     border: 1px solid #444; /* Dark border */
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.1); /* Subtle background */
     color: #fff;
     transition: background-color 0.3s ease;
+    resize: none; /* Disable resizing */
 }
 
 .add-review-section textarea:focus {
     background-color: rgba(255, 255, 255, 0.2); /* Highlight on focus */
+    outline: none; /* Remove default focus outline */
+}
+
+.add-review-section .rating-stars {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.add-review-section .rating-stars span {
+    transition: color 0.3s ease;
+}
+
+.add-review-section .rating-stars span:hover,
+.add-review-section .rating-stars span.active {
+    color: gold;
 }
 
 .add-review-section button {
-    padding: 10px 20px;
+    width: 100%;
+    max-width: 600px;
+    padding: 12px;
     font-size: 16px;
     background-color: #4CAF50; /* Green background */
     color: #fff;
@@ -124,10 +181,9 @@
     text-align: center;
 }
 
-.admin-controls button {
+.admin-controls .button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #2196F3; /* Blue background */
     color: #fff;
     border: none;
     cursor: pointer;
@@ -136,8 +192,52 @@
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.admin-controls button:hover {
+.admin-controls .button.blue {
+    background-color: #2196F3; /* Blue background */
+}
+
+.admin-controls .button.green {
+    background-color: #4CAF50; /* Green background */
+}
+
+.admin-controls .button.gray {
+    background-color: #6c757d; /* Gray background for Go Back button */
+}
+
+.admin-controls .button:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.admin-controls .button.blue:hover {
     background-color: #1E88E5; /* Darker blue hover background */
+}
+
+.admin-controls .button.green:hover {
+    background-color: #45a049; /* Darker green hover background */
+}
+
+.admin-controls .button.gray:hover {
+    background-color: #5a6268; /* Darker gray hover background */
+}
+
+/* Go Back Button */
+.go-back-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #6c757d; /* Gray background */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+.go-back-button:hover {
+    background-color: #5a6268; /* Darker gray hover background */
     transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
@@ -152,14 +252,21 @@
         max-height: 200px; /* Reduce image height on smaller screens */
     }
 
-    .add-review-section textarea {
+    .add-review-section textarea,
+    .add-review-section .rating-stars,
+    .add-review-section button {
         font-size: 14px;
-        padding: 6px;
+        padding: 8px;
     }
 
-    .add-review-section button,
-    .admin-controls button {
+    .add-review-section .rating-stars span {
+        font-size: 1.2em;
+    }
+
+    .go-back-button {
+        bottom: 10px;
+        right: 10px;
+        padding: 8px 15px;
         font-size: 14px;
-        padding: 8px 10px;
     }
 }

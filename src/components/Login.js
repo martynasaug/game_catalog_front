@@ -1,5 +1,3 @@
-// src/components/Login.js
-
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -44,35 +42,32 @@ const Login = () => {
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
                 <div className="input-group">
-                    <label htmlFor="username">Username:</label>
+                    <label>Username:</label>
                     <input
                         type="text"
-                        id="username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
                 </div>
                 <div className="input-group">
-                    <label htmlFor="password">Password:</label>
+                    <label>Password:</label>
                     <input
                         type="password"
-                        id="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
                 </div>
-                <button type="submit" className="blue button-link fancy">
-                    Login
-                </button>
+                <button type="submit">Login</button>
             </form>
-            <p className="register-link">
+            <div className="register-link">
                 Don't have an account?{' '}
-                <Link to="/register" className="link">
-                    Register here
-                </Link>
-            </p>
+                <Link to="/register">Register here</Link>
+            </div>
+            <button className="go-back-button" onClick={() => navigate(-1)}>
+                Go Back
+            </button>
         </div>
     );
 };

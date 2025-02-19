@@ -1,4 +1,3 @@
-// src/components/Register.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
@@ -28,7 +27,7 @@ const Register = () => {
     return (
         <div className="register-container">
             <h2>Register</h2>
-            <form onSubmit={handleSubmit} className="register-form">
+            <form className="register-form" onSubmit={handleSubmit}>
                 <div className="input-group">
                     <label>Username:</label>
                     <input
@@ -47,16 +46,15 @@ const Register = () => {
                         required
                     />
                 </div>
-                <button type="submit" className="register-button">
-                    Register
-                </button>
+                <button className="register-button" type="submit">Register</button>
             </form>
-            <p className="login-link">
+            <div className="login-link">
                 Already have an account?{' '}
-                <Link to="/login" className="link">
-                    Login here
-                </Link>
-            </p>
+                <Link to="/login">Login here</Link>
+            </div>
+            <button className="go-back-button" onClick={() => navigate(-1)}>
+                Go Back
+            </button>
         </div>
     );
 };
