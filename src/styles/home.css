@@ -36,28 +36,39 @@ body {
 
 .buttons {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     margin-bottom: 40px;
 }
 
-.button-link {
-    padding: 10px 20px;
+/* Updated button styles with icons */
+.button-link.blue {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
     font-size: 16px;
     border: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s ease;
     text-decoration: none;
     color: #fff;
     cursor: pointer;
-}
-
-.button-link.blue {
     background-color: #2196F3;
 }
 
 .button-link.blue:hover {
     background-color: #1E88E5;
     transform: scale(1.05);
+}
+
+.home-icon {
+    font-size: 0.9em;
+    margin-top: -1px;
+    transition: transform 0.2s ease;
+}
+
+.button-link.blue:hover .home-icon {
+    transform: translateX(2px);
 }
 
 .button-85 {
@@ -144,17 +155,17 @@ body {
     color: #fff;
     display: flex;
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.3); /* Lowered opacity for blending */
+    background-color: rgba(0, 0, 0, 0.3);
     border-radius: 10px;
-    box-shadow: none; /* Removed box shadow for smoother transition */
+    box-shadow: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: visible;
     width: 100%;
     max-width: 250px;
     position: relative;
-    backdrop-filter: blur(1px); /* Subtle blur to integrate more with background */
+    backdrop-filter: blur(1px);
     animation: cardFadeIn 0.5s ease;
-    padding-bottom: 50px;
+    padding-bottom: 70px;
 }
 
 .game-card-link {
@@ -164,7 +175,6 @@ body {
 
 .game-card:hover {
     transform: translateY(-5px);
-    box-shadow: none; /* Optional: Remove shadow on hover for a softer effect */
 }
 
 .game-image {
@@ -266,9 +276,18 @@ h2:hover span {
         font-size: 1em;
     }
 
-    .button-link {
-        font-size: 12px;
-        padding: 8px 10px;
+    .button-link.blue {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    .button-link.blue span {
+        display: none;
+    }
+
+    .home-icon {
+        font-size: 1.2em;
+        margin: 0;
     }
 
     .game-grid {
@@ -292,6 +311,16 @@ h2:hover span {
     .star-rating {
         font-size: 1em;
         margin-top: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .button-link.blue {
+        padding: 8px 12px;
+    }
+    
+    .home-icon {
+        font-size: 1.1em;
     }
 }
 

@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../styles/game-page.css'; // Import game-page.css
 import { AuthContext } from '../context/AuthContext'; // Import AuthContext
 import NotFound from './NotFound'; // Import the NotFound component
+import { CiUser } from 'react-icons/ci';
 
 const GamePage = () => {
     const { id } = useParams();
@@ -213,7 +214,7 @@ const GamePage = () => {
                 {reviews.length > 0 ? (
                     reviews.map((review) => (
                         <div key={review.id} className="review-card">
-                            <strong>{review.username || 'Unknown User'}</strong>
+                            <strong><CiUser /> {review.username || 'Unknown User'}:</strong>
                             <p>{review.comment}</p>
                             <p>
                                 <strong>Rating:</strong>{' '}

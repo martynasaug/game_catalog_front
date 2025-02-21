@@ -3,6 +3,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
+import { FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 import '../styles/home.css';
 
 const Home = () => {
@@ -109,8 +110,14 @@ const Home = () => {
 
             {!user && (
                 <div className="buttons">
-                    <Link to="/login" className="button-link blue">Login</Link>
-                    <Link to="/register" className="button-link blue">Register</Link>
+                    <Link to="/login" className="button-link blue">
+                        <FaSignInAlt className="home-icon" />
+                        <span>Login</span>
+                    </Link>
+                    <Link to="/register" className="button-link blue">
+                        <FaUserPlus className="home-icon" />
+                        <span>Register</span>
+                    </Link>
                 </div>
             )}
 

@@ -9,18 +9,29 @@ const GameList = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
-    const [loading, setLoading] = useState(true); // Add loading state
+    const [loading, setLoading] = useState(true);
+    const [sortBy, setSortBy] = useState('');
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    const sortOptions = [
+        { value: '', label: 'None' },
+        { value: 'newest', label: 'Newest' },
+        { value: 'oldest', label: 'Oldest' },
+        { value: 'highestRating', label: 'Highest Rating' },
+    ];
+
+    const selectedLabel = sortOptions.find(opt => opt.value === sortBy)?.label || 'None';
 
     useEffect(() => {
         const fetchGames = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/games');
+                const response = await axios.get('http://localhost:8080/api/games', {
+                    params: { sortBy }
+                });
                 const gamesData = await Promise.all(response.data.map(async (game) => {
                     try {
-                        // Fetch reviews for each game
                         const reviewResponse = await axios.get(`http://localhost:8080/api/reviews/by-game/${game.id}`);
                         const reviews = reviewResponse.data || [];
-                        // Calculate average rating
                         const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
                         const averageRating = reviews.length > 0 ? (totalRating / reviews.length).toFixed(1) : 0;
                         return {
@@ -39,18 +50,12 @@ const GameList = () => {
                 console.error('Error fetching games:', error);
                 setErrorMessage("Failed to fetch games.");
             } finally {
-                setLoading(false); // Ensure loading is set to false after fetching
+                setLoading(false);
             }
         };
         fetchGames();
-    }, []);
+    }, [sortBy]);
 
-    // Render loading state
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    // Render star rating
     const renderStars = (rating) => {
         const stars = [];
         const fullStars = Math.floor(rating);
@@ -73,53 +78,83 @@ const GameList = () => {
 
     return (
         <div className="game-list-container">
-            {/* Display error message if present */}
             {errorMessage && (
                 <div className="error-message">{errorMessage}</div>
             )}
             <h2>Games</h2>
-            {/* Add "Add New Game" Button for Admins (aligned to left) */}
-            {user?.roles?.includes('ROLE_ADMIN') && (
-                <div className="add-game-button-container">
-                    <Link to="/add-game" className="button-link fancy green">
-                        Add New Game
-                    </Link>
+
+            {/* Custom Dropdown */}
+            <div className="custom-dropdown">
+                <input 
+                    type="checkbox" 
+                    id="sort-dropdown" 
+                    checked={isDropdownOpen}
+                    onChange={(e) => setIsDropdownOpen(e.target.checked)}
+                />
+                <label className="dropdown-toggle" htmlFor="sort-dropdown">
+                    Sort by: {selectedLabel} <span className="arrow"></span>
+                </label>
+                <div className="dropdown-menu">
+                    {sortOptions.map(option => (
+                        <div
+                            key={option.value}
+                            className="menu-item"
+                            onClick={() => {
+                                setSortBy(option.value);
+                                setIsDropdownOpen(false);
+                            }}
+                        >
+                            {option.label}
+                            <span className="menu-arrow"></span>
+                        </div>
+                    ))}
                 </div>
-            )}
-            {/* Game Grid */}
-            <div className="game-grid">
-                {games.map((game) => (
-                    <div key={game.id} className="game-card">
-                        {/* Clickable game card (excluding buttons) */}
-                        <Link to={`/games/${game.id}`} className="game-card-link">
-                            {game.imageUrl && (
-                                <img src={`http://localhost:8080${game.imageUrl}`} alt={game.title} className="game-image" />
-                            )}
-                            <div className="game-card-content">
-                                <h3>{game.title}</h3>
-                                <p>{game.description}</p>
-                                <strong>Platform: {game.platform}</strong>
-                                <br />
-                                <strong>Release Date: {game.releaseDate ? game.releaseDate.toLocaleDateString() : 'Not Available'}</strong>
-                                <br />
-                                <strong>Average Rating:</strong>
-                                <div className="star-rating">
-                                    {renderStars(game.averageRating)}
-                                </div>
-                            </div>
-                        </Link>
-                        {/* Separate "Edit Game" button (for admins) */}
-                        {user?.roles?.includes('ROLE_ADMIN') && (
-                            <div className="edit-button-container">
-                                <Link to={`/edit-game/${game.id}`} className="edit-button fancy blue">
-                                    Edit Game
-                                </Link>
-                            </div>
-                        )}
-                    </div>
-                ))}
             </div>
-            {/* Go Back Button */}
+
+            {loading ? (
+                <div className="loading-message">Loading games...</div>
+            ) : (
+                <>
+                    {user?.roles?.includes('ROLE_ADMIN') && (
+                        <div className="add-game-button-container">
+                            <Link to="/add-game" className="button-link fancy green">
+                                Add New Game
+                            </Link>
+                        </div>
+                    )}
+                    <div className="game-grid">
+                        {games.map((game) => (
+                            <div key={game.id} className="game-card">
+                                <Link to={`/games/${game.id}`} className="game-card-link">
+                                    {game.imageUrl && (
+                                        <img src={`http://localhost:8080${game.imageUrl}`} alt={game.title} className="game-image" />
+                                    )}
+                                    <div className="game-card-content">
+                                        <h3>{game.title}</h3>
+                                        <p>{game.description}</p>
+                                        <strong>Platform: {game.platform}</strong>
+                                        <br />
+                                        <strong>Release Date: {game.releaseDate ? game.releaseDate.toLocaleDateString() : 'Not Available'}</strong>
+                                        <br />
+                                        <strong>Average Rating:</strong>
+                                        <div className="star-rating">
+                                            {renderStars(game.averageRating)}
+                                        </div>
+                                    </div>
+                                </Link>
+                                {user?.roles?.includes('ROLE_ADMIN') && (
+                                    <div className="edit-button-container">
+                                        <Link to={`/edit-game/${game.id}`} className="edit-button fancy blue">
+                                            Edit Game
+                                        </Link>
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </>
+            )}
+
             <button className="go-back-button" onClick={() => navigate(-1)}>
                 Go Back
             </button>

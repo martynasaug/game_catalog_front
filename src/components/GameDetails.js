@@ -1,7 +1,5 @@
-// src/components/GameDetails.js
-
 import React, { useEffect, useState, useContext } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/game-details.css';
 import { AuthContext } from '../context/AuthContext';
@@ -21,12 +19,10 @@ const GameDetails = () => {
 
     useEffect(() => {
         if (loading) return;
-
         if (!user || !user.roles.includes('ROLE_ADMIN')) {
             navigate('/games', { state: { errorMessage: 'Access denied. Only admins can add or edit games.' } });
             return;
         }
-
         // Fetch existing game data if editing (ID is provided)
         if (id) {
             const fetchGame = async () => {
@@ -56,19 +52,16 @@ const GameDetails = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (!user || !user.roles.includes('ROLE_ADMIN')) {
             navigate('/games', { state: { errorMessage: 'Access denied. Only admins can add or edit games.' } });
             return;
         }
-
         const formData = new FormData();
         if (file) formData.append('file', file);
         formData.append('title', game.title);
         formData.append('description', game.description);
         formData.append('platform', game.platform);
         formData.append('releaseDate', game.releaseDate);
-
         try {
             if (id) {
                 // Update existing game
@@ -91,10 +84,30 @@ const GameDetails = () => {
         }
     };
 
+    const handleDelete = async () => {
+        if (!window.confirm('Are you sure you want to delete this game?')) {
+            return; // Cancel deletion if user cancels the confirmation
+        }
+        try {
+            await axios.delete(`http://localhost:8080/api/games/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            });
+            navigate('/games'); // Redirect to game list after deletion
+        } catch (error) {
+            console.error('Error deleting game:', error);
+            alert('Error deleting game. Please try again.');
+        }
+    };
+
+    const handleCancel = () => {
+        navigate('/games'); // Navigate to the games list when cancel is clicked
+    };
+
     return (
         <div className="game-details-container">
             <h2>{id ? 'Edit Game' : 'Add New Game'}</h2>
-
             <form onSubmit={handleSubmit}>
                 <div className="input-group">
                     <label htmlFor="title">Title:</label>
@@ -152,10 +165,16 @@ const GameDetails = () => {
                     {id ? 'Update Game' : 'Add Game'}
                 </button>
             </form>
-
-            <Link to="/games" className="button-link fancy red">
-                Cancel
-            </Link>
+            <div className="action-buttons">
+                {id && (
+                    <button onClick={handleDelete} className="button-link fancy red">
+                        Delete Game
+                    </button>
+                )}
+                <button onClick={handleCancel} className="button-link fancy gray">
+                    Cancel
+                </button>
+            </div>
         </div>
     );
 };
