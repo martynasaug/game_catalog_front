@@ -1,9 +1,7 @@
-// src/components/Navbar.js
-
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { FaSignInAlt, FaUserPlus, FaSignOutAlt, FaPlus, FaGamepad } from 'react-icons/fa';
+import { FaSignInAlt, FaUserPlus, FaSignOutAlt, FaPlus, FaGamepad, FaUser } from 'react-icons/fa';
 import logo from '../assets/logo.png';
 import '../styles/navbar.css';
 
@@ -38,6 +36,12 @@ const Navbar = () => {
                     </>
                 ) : (
                     <>
+                        {user && user.id && (
+                            <Link to={`/profile/${user.id}`} className="navbar-link fancy">
+                                <FaUser className="icon" />
+                                <span>Profile</span>
+                            </Link>
+                        )}
                         <Link to="/games" className="navbar-link fancy">
                             <FaGamepad className="icon" />
                             <span>Games</span>

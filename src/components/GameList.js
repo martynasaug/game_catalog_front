@@ -6,12 +6,14 @@ import { AuthContext } from '../context/AuthContext';
 
 const GameList = () => {
     const [games, setGames] = useState([]);
+    const [filteredGames, setFilteredGames] = useState([]); // For filtered games
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(true);
     const [sortBy, setSortBy] = useState('');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState(''); // For search input
 
     const sortOptions = [
         { value: '', label: 'None' },
@@ -37,7 +39,7 @@ const GameList = () => {
                         return {
                             ...game,
                             reviews,
-                            averageRating,
+                            averageRating: parseFloat(averageRating),
                             releaseDate: game.releaseDate ? new Date(game.releaseDate) : null
                         };
                     } catch (reviewError) {
@@ -46,6 +48,7 @@ const GameList = () => {
                     }
                 }));
                 setGames(gamesData);
+                setFilteredGames(gamesData); // Initialize filteredGames with all games
             } catch (error) {
                 console.error('Error fetching games:', error);
                 setErrorMessage("Failed to fetch games.");
@@ -56,21 +59,33 @@ const GameList = () => {
         fetchGames();
     }, [sortBy]);
 
+    // Handle search input change
+    const handleSearch = (e) => {
+        const query = e.target.value.toLowerCase();
+        setSearchQuery(query);
+
+        // Filter games based on the search query
+        const filtered = games.filter((game) =>
+            game.title.toLowerCase().includes(query)
+        );
+        setFilteredGames(filtered);
+    };
+
     const renderStars = (rating) => {
         const stars = [];
         const fullStars = Math.floor(rating);
         const hasHalfStar = rating - fullStars >= 0.5;
 
         for (let i = 0; i < fullStars; i++) {
-            stars.push(<span key={i} className="star">★</span>);
+            stars.push(<span key={i}>★</span>);
         }
 
         if (hasHalfStar) {
-            stars.push(<span key="half" className="star">☆</span>);
+            stars.push(<span key="half">☆</span>);
         }
 
         while (stars.length < 5) {
-            stars.push(<span key={`empty-${stars.length}`} className="star empty-star">☆</span>);
+            stars.push(<span key={`empty-${stars.length}`} className="empty-star">☆</span>);
         }
 
         return stars;
@@ -82,6 +97,17 @@ const GameList = () => {
                 <div className="error-message">{errorMessage}</div>
             )}
             <h2>Games</h2>
+
+            {/* Search Input */}
+            <div className="search-container">
+                <input
+                    type="text"
+                    placeholder="Search games by title..."
+                    value={searchQuery}
+                    onChange={handleSearch}
+                    className="search-input"
+                />
+            </div>
 
             {/* Custom Dropdown */}
             <div className="custom-dropdown">
@@ -123,7 +149,7 @@ const GameList = () => {
                         </div>
                     )}
                     <div className="game-grid">
-                        {games.map((game) => (
+                        {filteredGames.map((game) => (
                             <div key={game.id} className="game-card">
                                 <Link to={`/games/${game.id}`} className="game-card-link">
                                     {game.imageUrl && (

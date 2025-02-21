@@ -5,12 +5,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import GameList from './components/GameList';
 import GamePage from './components/GamePage';
-import GameDetails from './components/GameDetails'; // Import GameDetails
+import GameDetails from './components/GameDetails'; 
 import Login from './components/Login';
 import Register from './components/Register';
 import NotFound from './components/NotFound'; // Optional: Add a 404 page
-import Navbar from './components/Navbar'; // Import Navbar
-import { AuthProvider } from './context/AuthContext'; // Named import
+import Navbar from './components/Navbar'; 
+import { AuthProvider } from './context/AuthContext'; 
+import Profile from './components/Profile';
 
 function App() {
     return (
@@ -42,6 +43,8 @@ function App() {
 
                         {/* Optional: 404 Page */}
                         <Route path="*" element={<NotFound />} />
+
+                        <Route path="/profile/:userId" element={<Profile />} />
                     </Routes>
                 </div>
             </Router>

@@ -270,3 +270,13 @@
         font-size: 14px;
     }
 }
+.username-link {
+    color: #2196F3; /* Blue color for the link */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease;
+}
+
+.username-link:hover {
+    color: #1E88E5; /* Darker blue on hover */
+    text-decoration: underline; /* Add underline on hover */
+}

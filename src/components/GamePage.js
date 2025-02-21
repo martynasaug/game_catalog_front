@@ -214,7 +214,13 @@ const GamePage = () => {
                 {reviews.length > 0 ? (
                     reviews.map((review) => (
                         <div key={review.id} className="review-card">
-                            <strong><CiUser /> {review.username || 'Unknown User'}:</strong>
+                            {/* Link to the user's profile */}
+                            <strong>
+                                <CiUser />{' '}
+                                <Link to={`/profile/${review.userId}`} className="username-link">
+                                    {review.username || 'Unknown User'}
+                                </Link>:
+                            </strong>
                             <p>{review.comment}</p>
                             <p>
                                 <strong>Rating:</strong>{' '}
